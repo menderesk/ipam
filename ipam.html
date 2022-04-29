@@ -1,135 +1,101 @@
 <!DOCTYPE html>
 <html>
+<header></header>
 <body>
 
-<h2>Parsing a JSON Array.</h2>
-<p>Data written as an JSON array will be parsed into a JavaScript array.</p>
-<p id="demo"></p>
-
+<p id="token"></p>
+<p id="ipAddCreate"></p>
+<p id="getPatch"></p>
+<p id="getHostname"></p>
 <script>
-  const url = "http://ipam.sandbox/api/deneme/addresses/first_free/2";
+// const url = "http://ipam.sandbox/api/deneme/addresses/first_free/2";
+//
+//const options = {
+//  method: 'POST',
+  //mode: "strict-origin-when-cross-origin",
+//  headers: {
+//    "phpipam-token" : "RdVY2C5nmOxiWHLz4wZ2cXqy",
 
-  const options = {
-    method: 'POST',
-    //mode: "strict-origin-when-cross-origin",
-    headers: {
-      "phpipam-token" : "RdVY2C5nmOxiWHLz4wZ2cXqy",
-      "Content-Security-Policy": "sandbox"
+//  }
+//};
+
+fetch(url, options)
+  .then( res => res.json() )
+  .then( data => console.log(data) );
+
+function tokenCreate() {
+    
+    const outputData = JSON.parse('{"code": 200, "success": true, "data": { "token": "RdVY2C5nmOxiWHLz4wZ2cXqy", "expires": "2022-04-29 18:08:20" }, "time": 0.084}');
+    var token = outputData.data.token;
+    return token;
+    }
+
+
+console.log(tokenCreate.call());
+document.getElementById("token").innerHTML = "<b>Oluşturulan Token:</b> " + tokenCreate.call();
+
+function ipAddCreate() {
+    // Rest API url http://localhost/api/deneme/addresses/first_free/{subnetid}/
+    const outputData = JSON.parse('{"code": 201, "success": true, "message": "Address created", "id": "18", "data": "10.10.1.12", "time": 0.099}');
+    if (outputData.code != 201) {
+    
+        console.log("Hatalı istek: " + outputData.success);
+        
+    }
+
+    else {
+        var ipAddress = outputData.data;
+    }
+    
+    return ipAddress;
+    }
+
+console.log(ipAddCreate.call());
+document.getElementById("ipAddCreate").innerHTML = "<b>Oluşturulan IP:</b> " + ipAddCreate.call();
+
+function getPatch() {
+    // Rest API url Method PATCH http://localhost/api/deneme/addresses/ipID/?hostname=buluttan.local&PTR=12.1.10.10.in-addr.arpa.&excludePing=1&owner=menderes
+    const outputData = JSON.parse('{"code": 200, "success": true, "message": "Address updated", "time": 0.049}');
+    if (outputData.code != 200) {
+    
+        console.log("Hatalı istek: " + outputData.message);
+        
+    }
+
+    else {
+        var patchResult = outputData.message;
 
     }
-  };
+    
+    return patchResult;
+    }
 
-  fetch(url, options)
-    .then( res => res.json() )
-    .then( data => console.log(data) );
+console.log(getPatch.call());
+document.getElementById("getPatch").innerHTML = "<b>Patch İşlemi:</b> " + getPatch.call();
+
+function getHostname() {
+    // Rest API url Method GET ttp://localhost/api/deneme/addresses/search/ipAddCreate.call();
+    const outputData = JSON.parse('{"code": 200, "success": true, "data": [{"id": "18", "subnetId": "3", "ip": "10.10.1.12", "is_gateway": null, "description": "API created", "hostname": "buluttan.local", "mac": null, "owner": "menderes\n", "tag": "2",  "deviceId": null, "location": null, "port": null, "note": null, "lastSeen": null, "excludePing": "1", "PTRignore": null, "PTR": "0", "firewallAddressObject": null, "editDate": "2022-04-29 11:18:11", "customer_id": null}], "time": 0.029}');
+    if (outputData.code != 200) {
+    
+        console.log("Hatalı istek: " + outputData.data.hostname);
+        
+    }
+
+    else {
+        var hostnameResult = outputData.data.hostname;
+
+    }
+    
+    return hostnameResult;
+    }
+
+console.log(getHostname.call());
+document.getElementById("getHostname").innerHTML = "<b>Hostname:</b> " + getHostname.call();
+
+
 
 </script>
 
 </body>
 </html>
-
-{
-    "code": 200,
-    "success": true,
-    "data": {
-        "token": "RdVY2C5nmOxiWHLz4wZ2cXqy",
-        "expires": "2022-04-29 18:08:20"
-    },
-    "time": 0.084
-}
-
-http://localhost/api/deneme/addresses/first_free/3/
-
-{
-    "code": 200,
-    "success": true,
-    "data": "10.10.1.12",
-    "time": 0.018
-}
-
-post
-{
-    "code": 201,
-    "success": true,
-    "message": "Address created",
-    "id": "18",
-    "data": "10.10.1.12",
-    "time": 0.099
-}
-http://localhost/api/deneme/addresses/18/?hostname=buluttan.local&PTR=12.1.10.10.in-addr.arpa.&excludePing=1&owner=menderes
-
-{
-    "code": 200,
-    "success": true,
-    "message": "Address updated",
-    "time": 0.049
-}
-
-http://localhost/api/deneme/addresses/18
-{
-    "code": 200,
-    "success": true,
-    "data": {
-        "id": "18",
-        "subnetId": "3",
-        "ip": "10.10.1.12",
-        "is_gateway": null,
-        "description": "API created",
-        "hostname": "buluttan.local",
-        "mac": null,
-        "owner": "menderes",
-        "tag": "2",
-        "deviceId": null,
-        "location": null,
-        "port": null,
-        "note": null,
-        "lastSeen": null,
-        "excludePing": "1",
-        "PTRignore": null,
-        "PTR": "0",
-        "firewallAddressObject": null,
-        "editDate": "2022-04-29 11:16:23",
-        "customer_id": null
-    },
-    "time": 0.027
-}
-
-http://localhost/api/deneme/addresses/search/10.10.1.12
-
-{
-    "code": 200,
-    "success": true,
-    "data": [
-        {
-            "id": "18",
-            "subnetId": "3",
-            "ip": "10.10.1.12",
-            "is_gateway": null,
-            "description": "API created",
-            "hostname": "buluttan.local",
-            "mac": null,
-            "owner": "menderes\n",
-            "tag": "2",
-            "deviceId": null,
-            "location": null,
-            "port": null,
-            "note": null,
-            "lastSeen": null,
-            "excludePing": "1",
-            "PTRignore": null,
-            "PTR": "0",
-            "firewallAddressObject": null,
-            "editDate": "2022-04-29 11:18:11",
-            "customer_id": null
-        }
-    ],
-    "time": 0.029
-}
-
-http://localhost/api/deneme/addresses/18
-{
-    "code": 200,
-    "success": true,
-    "message": "Address deleted",
-    "time": 0.087
-}
