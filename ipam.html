@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Parsing a JSON Array.</h2>
+<p>Data written as an JSON array will be parsed into a JavaScript array.</p>
+<p id="demo"></p>
+
+<script>
+  const url = "http://ipam.sandbox/api/deneme/addresses/first_free/2";
+
+  const options = {
+    method: 'POST',
+    //mode: "strict-origin-when-cross-origin",
+    headers: {
+      "phpipam-token" : "RdVY2C5nmOxiWHLz4wZ2cXqy",
+      "Content-Security-Policy": "sandbox"
+
+    }
+  };
+
+  fetch(url, options)
+    .then( res => res.json() )
+    .then( data => console.log(data) );
+
+</script>
+
+</body>
+</html>
