@@ -27,3 +27,109 @@
 
 </body>
 </html>
+
+{
+    "code": 200,
+    "success": true,
+    "data": {
+        "token": "RdVY2C5nmOxiWHLz4wZ2cXqy",
+        "expires": "2022-04-29 18:08:20"
+    },
+    "time": 0.084
+}
+
+http://localhost/api/deneme/addresses/first_free/3/
+
+{
+    "code": 200,
+    "success": true,
+    "data": "10.10.1.12",
+    "time": 0.018
+}
+
+post
+{
+    "code": 201,
+    "success": true,
+    "message": "Address created",
+    "id": "18",
+    "data": "10.10.1.12",
+    "time": 0.099
+}
+http://localhost/api/deneme/addresses/18/?hostname=buluttan.local&PTR=12.1.10.10.in-addr.arpa.&excludePing=1&owner=menderes
+
+{
+    "code": 200,
+    "success": true,
+    "message": "Address updated",
+    "time": 0.049
+}
+
+http://localhost/api/deneme/addresses/18
+{
+    "code": 200,
+    "success": true,
+    "data": {
+        "id": "18",
+        "subnetId": "3",
+        "ip": "10.10.1.12",
+        "is_gateway": null,
+        "description": "API created",
+        "hostname": "buluttan.local",
+        "mac": null,
+        "owner": "menderes",
+        "tag": "2",
+        "deviceId": null,
+        "location": null,
+        "port": null,
+        "note": null,
+        "lastSeen": null,
+        "excludePing": "1",
+        "PTRignore": null,
+        "PTR": "0",
+        "firewallAddressObject": null,
+        "editDate": "2022-04-29 11:16:23",
+        "customer_id": null
+    },
+    "time": 0.027
+}
+
+http://localhost/api/deneme/addresses/search/10.10.1.12
+
+{
+    "code": 200,
+    "success": true,
+    "data": [
+        {
+            "id": "18",
+            "subnetId": "3",
+            "ip": "10.10.1.12",
+            "is_gateway": null,
+            "description": "API created",
+            "hostname": "buluttan.local",
+            "mac": null,
+            "owner": "menderes\n",
+            "tag": "2",
+            "deviceId": null,
+            "location": null,
+            "port": null,
+            "note": null,
+            "lastSeen": null,
+            "excludePing": "1",
+            "PTRignore": null,
+            "PTR": "0",
+            "firewallAddressObject": null,
+            "editDate": "2022-04-29 11:18:11",
+            "customer_id": null
+        }
+    ],
+    "time": 0.029
+}
+
+http://localhost/api/deneme/addresses/18
+{
+    "code": 200,
+    "success": true,
+    "message": "Address deleted",
+    "time": 0.087
+}
